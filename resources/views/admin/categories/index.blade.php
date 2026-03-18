@@ -25,6 +25,11 @@
                             <td>{{ $category->name }}</td>
                             <td class="text-end">
 
+                                {{-- Dettaglio --}}
+                                <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info btn-sm">
+                                    🔍 Dettaglio
+                                </a>
+
                                 {{-- Modifica --}}
                                 <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">
                                     ✏️ Modifica

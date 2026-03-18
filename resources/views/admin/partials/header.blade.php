@@ -2,7 +2,7 @@
     <div class="container">
 
         {{-- Brand --}}
-        <a class="navbar-brand fw-bold" href="{{ route('products.index') }}">
+        <a class="navbar-brand fw-bold" href="{{ route('dashboard') }}">
             👗 Fashion Admin
         </a>
 
