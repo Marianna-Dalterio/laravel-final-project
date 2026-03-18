@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\admin\CategoryController;
+
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -28,3 +28,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/products', ProductController::class);
     Route::resource('/categories', CategoryController::class);
 });
+require __DIR__ . '/auth.php';
