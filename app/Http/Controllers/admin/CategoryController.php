@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -31,7 +31,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //regole di validazione dell'input, se l'input non le rispetta la validazione fallisce e compare il messaggio di errore
+        //automatico di Laravel che ho settato in create.blade.php
+        $request->validate([
+            'name' => 'required|min:3|max:100|string|unique:categories,name'
+        ]);
+
+        $data = $request->all();
+
+        $newCategory = new Category();
+
+        $newCategory->name = $data['name'];
+
+        $newCategory->save();
+
+        return redirect()->route("categories.index", $newCategory);
     }
 
     /**
