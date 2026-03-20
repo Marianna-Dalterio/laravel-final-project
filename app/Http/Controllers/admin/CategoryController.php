@@ -69,16 +69,29 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        return "Sei nell'update";
+        //Validazione-unique: Il campo name deve essere unico nella tabella categories, eccetto per il record con id $category->id
+        //senza questa eccezione, provando a cambiare un altro campo della categoria senza cambiare nome  Laravel lancerebbe un errore di duplicato 
+        //in questo caso possiamo solo modificare il nome ma se in futuro aggiungessimo più informazioni torna utile
+        $request->validate([
+            'name' => 'required|min:3|max:100|string|unique:categories,name,' . $category->id
+        ]);
+
+        $data = $request->all();
+
+        $category->name = $data['name'];
+        $category->update();
+
+        return redirect()->route('categories.show', $category);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }
