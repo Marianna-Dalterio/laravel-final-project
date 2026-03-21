@@ -33,8 +33,15 @@
                             {{-- Immagine --}}
                             <td>
                                 @if ($product->image)
-                                    <img src="{{ $product->image }}" alt="{{ $product->name }}"
-                                        style="width: 50px; height: 60px; object-fit: cover;" class="rounded">
+                                    @if (str_starts_with($product->image, 'http'))
+                                        {{-- Immagine esterna dal seeder --}}
+                                        <img src="{{ $product->image }}" alt="{{ $product->name }}"
+                                            style="width: 50px; height: 60px; object-fit: cover;" class="rounded">
+                                    @else
+                                        {{-- Immagine caricata tramite upload --}}
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                            style="width: 50px; height: 60px; object-fit: cover;" class="rounded">
+                                    @endif
                                 @else
                                     <span class="text-muted">Non Disponibile</span>
                                 @endif

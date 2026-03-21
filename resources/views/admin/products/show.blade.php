@@ -21,8 +21,15 @@
             <div class="card shadow-sm">
                 <div class="card-body text-center">
                     @if ($product->image)
-                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="img-fluid rounded"
-                            style="max-height: 400px; object-fit: cover;">
+                        @if (str_starts_with($product->image, 'http'))
+                            {{-- Immagine esterna dal seeder --}}
+                            <img src="{{ $product->image }}" alt="{{ $product->name }}" class="img-fluid rounded"
+                                style="max-height: 400px; object-fit: cover;">
+                        @else
+                            {{-- Immagine caricata tramite upload --}}
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
+                        @endif
                     @else
                         <div class="text-muted py-5">
                             <p>Nessuna immagine disponibile</p>
