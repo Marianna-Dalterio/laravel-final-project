@@ -52,7 +52,7 @@ class ProductController extends Controller
 
         $newProduct->save();
 
-        //attacco le taglie nella tabella pivot, il controllo è necessario perchè se nessuna taglia è selezionata il campo non arriva
+        //poi attacco le taglie nella tabella pivot, il controllo è necessario perchè se nessuna taglia è selezionata il campo non arriva
         //nel $data e darebbe errore
         if (array_key_exists('sizes', $data)) {
             $newProduct->sizes()->attach($data['sizes']);
@@ -74,17 +74,47 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        $sizes = Size::all();
+        return view('admin.products.edit', compact('product', 'categories', 'sizes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->all();
+
+        $product->name = $data['name'];
+        $product->description = $data['description'];
+        $product->price = $data['price'];
+        $product->color = $data['color'];
+
+        //immagine
+        if (array_key_exists('image', $data)) {
+
+            // Elimino la precedente solo se è un file locale
+            if ($product->image && !str_starts_with($product->image, 'http')) {
+                Storage::delete($product->image);
+            }
+            //carico la nuova
+            $img_url = Storage::putFile("products", $data['image']);
+
+            //aggiorno il db
+            $product->image = $img_url;
+        }
+
+        $product->update();
+
+        if (array_key_exists('sizes', $data)) {
+            //sostituisce le taglie precedenti con le nuove
+            $product->sizes()->sync($data['sizes']);
+        }
+
+        return redirect()->route('products.show', $product);
     }
 
     /**
