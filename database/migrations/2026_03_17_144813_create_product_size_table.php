@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('product_size', function (Blueprint $table) {
             //una tabella pivot pura non ha bisogno di id e timestamps. Tecnicamente non causa errori lasciarli, ma è una cattiva pratica.
             //una pivot con id e timestamps segnalerebbe a chi legge il codice che è un Model a sé stante, non una semplice tabella di collegamento.
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('size_id')->constrained();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('size_id')->constrained()->cascadeOnDelete();
         });
     }
 

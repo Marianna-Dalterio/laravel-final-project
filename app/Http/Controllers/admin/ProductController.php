@@ -120,8 +120,15 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        //come nell'update, prima di eliminare il file verifico che sia un file locale
+        if ($product->image && !str_starts_with($product->image, 'http')) {
+            Storage::delete($product->image);
+        }
+
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 }
