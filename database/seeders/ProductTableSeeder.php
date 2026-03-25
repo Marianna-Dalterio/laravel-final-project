@@ -15,7 +15,8 @@ class ProductTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //Recupero tutte le categorie e taglie già inserite
+        //Recupero tutte le categorie e taglie già inserite evitando query ripetute nel ciclo
+
         $categories = Category::all();
         $sizes = Size::all();
 
@@ -87,7 +88,8 @@ class ProductTableSeeder extends Seeder
             $product->category_id = $categories->random()->id;
             $product->save();
 
-            //collego 3-4 taglie casuali nella tabella pivot
+            //collego 3-4 taglie(rand(3,4)) casuali(random) nella tabella pivot, con pluck estraggo solo l'id di ogni elem. della collection
+            //converto la collection in un array php nativo perchè attach si aspetta un array 
             $randomSizes = $sizes->random(rand(3, 4))->pluck('id')->toArray();
             $product->sizes()->attach($randomSizes);
         }

@@ -53,7 +53,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //chiamo la funzione definita nel model 
+        //chiamo la funzione dei prodotti definita nel model
+        //mi serve per mostrare i prodotti associati alla categoria nella pagina dettaglio
         $products = $category->products;
         return view('admin.categories.show', compact('category', 'products'));
     }
@@ -72,7 +73,8 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //Validazione-unique: Il campo name deve essere unico nella tabella categories, eccetto per il record con id $category->id
-        //senza questa eccezione, provando a cambiare un altro campo della categoria senza cambiare nome  Laravel lancerebbe un errore di duplicato 
+        //senza questa eccezione, provando a cambiare un altro campo della categoria senza cambiare nome 
+        //Laravel lancerebbe un errore di duplicato 
         //in questo caso possiamo solo modificare il nome ma se in futuro aggiungessimo più informazioni torna utile
         $request->validate([
             'name' => 'required|min:3|max:100|string|unique:categories,name,' . $category->id

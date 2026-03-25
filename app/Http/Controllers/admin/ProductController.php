@@ -96,7 +96,8 @@ class ProductController extends Controller
         //immagine
         if (array_key_exists('image', $data)) {
 
-            // Elimino la precedente solo se è un file locale
+            // Elimino la precedente solo se è un file locale, infatti Storage::delete cerca un file fisico nella cartella
+            // storage/app/public ma le immagini di picsum sono su un server esterno, non ci sarebbe un crash è solo scorretto
             if ($product->image && !str_starts_with($product->image, 'http')) {
                 Storage::delete($product->image);
             }

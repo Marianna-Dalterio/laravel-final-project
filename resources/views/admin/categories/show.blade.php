@@ -26,6 +26,7 @@
         <div class="card-body">
             <h5 class="card-title fw-bold mb-3">Prodotti associati</h5>
 
+            {{-- controllo se ci sono prodotti in quella categoria --}}
             @if (count($category->products) > 0)
 
                 <table class="table table-hover align-middle mb-0">
@@ -38,6 +39,7 @@
                             <th class="text-end">Azioni</th>
                         </tr>
                     </thead>
+                    {{-- mostro i prodotti collegati --}}
                     <tbody>
                         @foreach ($products as $product)
                             <tr>
