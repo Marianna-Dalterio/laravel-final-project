@@ -30,4 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/products', ProductController::class);
     Route::resource('/categories', CategoryController::class);
 });
+
+Route::get(('/live'), function () {
+    return view('admin.products.live');
+});
 require __DIR__ . '/auth.php';

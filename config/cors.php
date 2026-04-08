@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:5174'], // porta di Vite/React
+    'allowed_origins' => ['http://localhost:5173'], // porta di Vite/React
 
     'allowed_origins_patterns' => [],
 
