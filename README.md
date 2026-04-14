@@ -41,3 +41,11 @@ Per testare il backoffice sul tuo computer:
 ## 💡 Cosa ho imparato
 Durante lo sviluppo di questo progetto finale, ho consolidato l'uso dei Controller, delle Migration e della logica MVC. La sfida principale è stata la gestione delle relazioni tra le entità, garantendo che ogni operazione CRUD riflettesse correttamente lo stato del database.
 
+---
+
+### 🔗 Repository Collegati
+Questo progetto è composto da due parti:
+- **Backend (Questo Repo):** Gestione dati e Backoffice in Laravel.
+- **Frontend:** Interfaccia utente in React. [Vai al Repository Frontend →](https://github.com/Marianna-Dalterio/laravel-final-project-frontend--.git)
+
+---
