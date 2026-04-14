@@ -2,7 +2,7 @@
 Benvenuti nel core backend del mio progetto finale per il Master in Web Development di Boolean. Questo repository ospita il sistema di gestione (Backoffice) per un e-commerce di abbigliamento, progettato per offrire un'esperienza di amministrazione sicura e strutturata.
 
 ## 📸Panoramica
-![Dashboard Backoffice] (./screenshots/dashboard.png)
+![Dashboard Backoffice](./screenshots/dashboard.png)
 
 
 ## 🚀 Panoramica del progetto
